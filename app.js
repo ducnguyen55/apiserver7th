@@ -71,6 +71,45 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *    responses:
  *      '200':
  *        description: All Product in database
+ * /user/register:
+ *   post:
+ *    description: Create new user in the database
+ *    parameters:
+ *    - name: name
+ *      description: Please enter name
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: gmail
+ *      description: Please enter gmail
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: password
+ *      description: Please enter password
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    responses:
+ *      '200':
+ *        description: Create new account
+ * /user/login:
+ *   post:
+ *    description: Login
+ *    parameters:
+ *    - name: gmail
+ *      description: Please enter gmail
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: password
+ *      description: Please enter password
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    responses:
+ *      '200':
+ *        description: Return token
  */
 
 
