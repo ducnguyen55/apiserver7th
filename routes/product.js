@@ -1,19 +1,8 @@
 const express = require('express');
 const router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://we00054643:1Licynduy@shopping-nbfge.mongodb.net/test?retryWrites=true&w=majority';
+const product = require('../controller/product');
 
-router.get('/get-data', function(req,res,next) {
-	MongoClient.connect(url, function(err,db){
-		if(err) throw err;
-		var dbo = db.db("Shopping");
-		dbo.collection("Product").find({}).toArray(function(err,result){
-			if (err) throw err;
-			res.send(result);
-			db.close();
-		});
-	});
-});
-
-
+router.get('/get-data',product.getproduct);
+router.post('/insert',product.createproduct);
 module.exports=router;
+
