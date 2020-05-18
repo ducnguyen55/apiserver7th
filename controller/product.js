@@ -16,7 +16,6 @@ exports.getproduct = async (req,res) => {
 }
 
 exports.createproduct = async (req,res) => {
-	res.send("AAAAAAAA");
 	const {id ,type ,name ,url ,price} = req.body;
 
     const product = new Product(
@@ -35,3 +34,33 @@ exports.createproduct = async (req,res) => {
         res.json({ message: err })
     }
 }
+
+exports.updateproduct = async (req, res) => {
+	console.log(req.body);
+    try {
+        const updateProduct = await Product.updateOne(
+            { id: req.body.id },
+            {
+                $set: {
+                	type: req.body.type,
+                    name: req.body.name,
+                    url: req.body.url,
+                    price: req.body.price
+                }
+            }
+        );
+        res.json(updateProduct);
+    } catch (err) {
+        res.json({ message: err })
+    }
+}
+
+exports.deleteproduct = async (req, res) => {
+	console.log(req.body);
+    try {
+        await Product.deleteOne({ id: req.body.id });
+        res.json({ message: 'Product deleted' });
+    } catch (err) {
+        res.json({ message: err })
+    }
+};
