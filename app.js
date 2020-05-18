@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 var multer = require('multer');
 var upload= multer();
 var mongoose = require('mongoose');
+require('dotenv/config');
 
 //API documentation
 const swaggerJsDoc=require('swagger-jsdoc');
@@ -140,12 +141,15 @@ app.use((req,res,next)=>{
     next();
 });
 
-const url = 'mongodb+srv://we00054643:1Licynduy@shopping-nbfge.mongodb.net/Shopping?retryWrites=true&w=majority';
-
-mongoose
-    .connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => console.log("Mongodb connected"))
-    .catch(err => console.log(err))
-
+mongoose.connect(
+    process.env.DB_CONNECTION,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+).then(() => console.log('MongoDB Connected!'))
+    .catch(err => {
+        console.log(err);
+    });
 
 module.exports = app;
