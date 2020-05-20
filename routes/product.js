@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const product = require('../controller/product');
 const jwt_decode = require('jwt-decode')
+const {ProductValidator} = require('../Validator/validator')
 
 function IsAdmin(req,res,next){
     Data = jwt_decode(req.body.token);
@@ -13,9 +14,9 @@ function IsAdmin(req,res,next){
     }
 }
 router.get('/get-data',product.getproduct);
-router.post('/insert',IsAdmin,product.createproduct);
+router.post('/insert',IsAdmin,ProductValidator,product.createproduct);
 router.patch('/update',IsAdmin,product.updateproduct);
-router.delete('/:deleteid',IsAdmin,product.deleteproduct);
+router.delete('/:deleteid',product.deleteproduct);
 
 module.exports=router;
 

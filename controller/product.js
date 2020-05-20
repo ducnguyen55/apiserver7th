@@ -55,7 +55,6 @@ exports.updateproduct = async (req, res) => {
 }
 
 exports.deleteproduct = async (req, res) => {
-	console.log(req.params);
     try {
         await Product.deleteOne({ id: req.params.deleteid });
         res.json({ message: 'Product deleted' });
