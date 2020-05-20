@@ -54,6 +54,7 @@ exports.login = (req,res) => {
 					_id: user._id,
 					full_name: user.full_name,
 					gmail: user.gmail,
+					role: user.role
 				}
 				let token = jwt.sign(payload, process.env.SECRET_KEY, {
 					expiresIn: 1440
@@ -70,3 +71,16 @@ exports.login = (req,res) => {
 		res.send('error: ' + err)
 	})
 };
+
+exports.logout = (req,res) => {
+	if (req.session) {
+        // delete session object
+        req.session.destroy(function(err) {
+            if(err) {
+                return res.json({err});
+            } else {
+                return res.json({'logout': "Success"});
+            }
+        });
+    }
+}

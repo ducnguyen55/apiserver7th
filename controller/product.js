@@ -17,7 +17,6 @@ exports.getproduct = async (req,res) => {
 
 exports.createproduct = async (req,res) => {
 	const {id ,type ,name ,url ,price} = req.body;
-
     const product = new Product(
         {
             id:id,
@@ -56,9 +55,9 @@ exports.updateproduct = async (req, res) => {
 }
 
 exports.deleteproduct = async (req, res) => {
-	console.log(req.body);
+	console.log(req.params);
     try {
-        await Product.deleteOne({ id: req.body.id });
+        await Product.deleteOne({ id: req.params.deleteid });
         res.json({ message: 'Product deleted' });
     } catch (err) {
         res.json({ message: err })
