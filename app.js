@@ -21,7 +21,68 @@ const swaggerOptions={
                 name: "Nguyễn Thanh Đức"
             },
             servers: ["http://localhost:3000"]
+        },
+        "schemes": ["http"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "securityDefinitions": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            },
+            "JWT": {
+                "type": "apiKey",
+                "name": "token",
+                "in": "header"
+            }
+        },
+        "paths": {
+            "/customer": {
+                "post": {
+                    "tags": ["Customers"],
+                    "description": "Create new customer in system",
+                    "parameters": [{
+                        "name": "customer",
+                        "in": "body",
+                        "description": "Customer that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Customer"
+                        }
+                    }],
+                "produces": ["application/json"],
+                "responses": {
+                    "201": {
+                        "description": "New customer is created",
+                        "schema": {
+                            "$ref": "#/definitions/Customer"
+                        }
+                    }
+                }
+            }
         }
+    },
+    "definitions": {
+        "Product": {
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "string"
+                },
+                "Url": {
+                    "type": "string"
+                },
+                "Price": {
+                    "type": "int"
+                }
+            }
+        }
+    }
     },
     apis: ["app.js"]
 };

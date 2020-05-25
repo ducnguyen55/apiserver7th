@@ -71,16 +71,3 @@ exports.login = (req,res) => {
 		res.send('error: ' + err)
 	})
 };
-
-exports.logout = (req,res) => {
-	if (req.session) {
-        // delete session object
-        req.session.destroy(function(err) {
-            if(err) {
-                return res.json({err});
-            } else {
-                return res.json({'logout': "Success"});
-            }
-        });
-    }
-}
