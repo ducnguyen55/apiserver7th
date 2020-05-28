@@ -15,8 +15,8 @@ function IsAdmin(req,res,next){
     }
 }
 router.get('/get-data',product.getproduct);
-router.post('/insert',IsAdmin,ProductValidator,product.createproduct);
-router.patch('/update',IsAdmin,product.updateproduct);
+router.post('/insert',ProductValidator,product.createproduct);
+router.patch('/update',product.updateproduct);
 router.delete('/:deleteid',product.deleteproduct);
 
 module.exports=router;

@@ -24,10 +24,10 @@ const swaggerOptions={
         },
         "schemes": ["http"],
         "securityDefinitions": {
-            "Bearer": {
+            "api_key": {
                 "type": "apiKey",
-                "name": "Authorization",
-                "in": "header"
+                "name": "api_key",
+                "in": "query"
             }
         }
     },
@@ -45,8 +45,17 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *    responses:
  *      '200':
  *        description: welcome my API
+ * /product/get-data:
+ *   get:
+ *    summary: Returns all product
+ *    description: Get response in url/contact/get-data
+ *    responses:
+ *      '200':
+ *        description: All Product in database
  * /contact/get-data:
  *   get:
+ *    tags: 
+ *    - "contact"
  *    summary: Returns all contact on web client
  *    description: Get response in url/contact/get-data
  *    responses:
@@ -54,6 +63,8 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *        description: All contact
  * /contact/insert:
  *   post:
+ *    tags: 
+ *    - "contact"
  *    description: Create new contact in the database
  *    parameters:
  *    - name: name
@@ -74,15 +85,10 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *    responses:
  *      '200':
  *        description: Create new contact
- * /product/get-data:
- *   get:
- *    summary: Returns all product
- *    description: Get response in url/contact/get-data
- *    responses:
- *      '200':
- *        description: All Product in database
  * /user/register:
  *   post:
+ *    tags: 
+ *    - "user"
  *    description: Create new user in the database
  *    parameters:
  *    - name: name
@@ -105,6 +111,8 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *        description: Create new account
  * /user/login:
  *   post:
+ *    tags: 
+ *    - "user"
  *    description: Login
  *    parameters:
  *    - name: gmail
@@ -120,6 +128,73 @@ app.use('/apidocs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *    responses:
  *      '200':
  *        description: Return token
+ * /product/insert:
+ *   post:
+ *    tags: 
+ *    - "admin"
+ *    description: Add product
+ *    parameters:
+ *    - name: type
+ *      description: Please enter product type(vest,dress,juyp,set)
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: name
+ *      description: Please enter product name
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: url
+ *      description: Please enter url image
+ *      in: formData
+ *      required: true
+ *      type: string
+ *    - name: price
+ *      description: Please enter product price
+ *      in: formData
+ *      required: true
+ *      type: integer
+ *    responses:
+ *      '200':
+ *        description: Success !!!
+ * /product/update:
+ *   patch:
+ *    tags: 
+ *    - "admin"
+ *    description: Update product's information
+ *    parameters:
+ *    - name: id
+ *      description: Please enter product id want to update
+ *      in: formData
+ *      type: integer
+ *      required: true
+ *    - name: name
+ *      description: Please enter product name
+ *      in: formData
+ *      type: string
+ *      required: true
+ *    - name: price
+ *      description: Please enter product price
+ *      in: formData
+ *      type: integer
+ *      required: true
+ *    responses:
+ *      '200':
+ *        description: Update Success !!
+ * /product/{id}:
+ *   delete:
+ *    tags: 
+ *    - "admin"
+ *    description: Delete product
+ *    parameters:
+ *    - name: id
+ *      description: Please enter product id want to delete
+ *      in: path
+ *      type: integer
+ *      required: true
+ *    responses:
+ *      '200':
+ *        description: Success !!
  */
 
 

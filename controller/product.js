@@ -7,8 +7,6 @@ const Product = require('../models/product');
 exports.getproduct = async (req,res) => {
     try 
     {
-        const token= req.header;
-        console.log(token);
         const product = await Product.find();
         res.json(product);
     } 
@@ -19,9 +17,10 @@ exports.getproduct = async (req,res) => {
 
 exports.createproduct = async (req,res) => {
 	const {id ,type ,name ,url ,price} = req.body;
+    const numberproduct = await Product.find();
     const product = new Product(
         {
-            id:id,
+            id:numberproduct[numberproduct.length-1].id + 1,
             type:type,
             name:name,
             url:url,
@@ -37,15 +36,13 @@ exports.createproduct = async (req,res) => {
 }
 
 exports.updateproduct = async (req, res) => {
-	console.log(req.body);
+	console.log(req.body); 
     try {
         const updateProduct = await Product.updateOne(
             { id: req.body.id },
             {
                 $set: {
-                	type: req.body.type,
                     name: req.body.name,
-                    url: req.body.url,
                     price: req.body.price
                 }
             }
@@ -57,6 +54,7 @@ exports.updateproduct = async (req, res) => {
 }
 
 exports.deleteproduct = async (req, res) => {
+    console.log(req.params.deleteid);
     try {
         await Product.deleteOne({ id: req.params.deleteid });
         res.json({ message: 'Product deleted' });
