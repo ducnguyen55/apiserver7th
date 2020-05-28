@@ -7,6 +7,8 @@ const Product = require('../models/product');
 exports.getproduct = async (req,res) => {
     try 
     {
+        const token= req.header;
+        console.log(token);
         const product = await Product.find();
         res.json(product);
     } 

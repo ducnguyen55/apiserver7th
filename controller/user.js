@@ -53,8 +53,7 @@ exports.login = (req,res) => {
 				const payload = {
 					_id: user._id,
 					full_name: user.full_name,
-					gmail: user.gmail,
-					role: user.role
+					gmail: user.gmail
 				}
 				let token = jwt.sign(payload, process.env.SECRET_KEY, {
 					expiresIn: 1440

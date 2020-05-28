@@ -3,6 +3,7 @@ const router = express.Router();
 const product = require('../controller/product');
 const jwt_decode = require('jwt-decode')
 const {ProductValidator} = require('../Validator/validator')
+const admin = require('../controller/admin');
 
 function IsAdmin(req,res,next){
     Data = jwt_decode(req.body.token);
