@@ -22,12 +22,11 @@ const swaggerOptions={
             },
             servers: ["http://localhost:3000"]
         },
-        "schemes": ["http"],
         "securityDefinitions": {
             "api_key": {
                 "type": "apiKey",
                 "name": "api_key",
-                "in": "query"
+                "in": "header"
             }
         }
     },

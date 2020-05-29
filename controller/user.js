@@ -53,12 +53,13 @@ exports.login = (req,res) => {
 				const payload = {
 					_id: user._id,
 					full_name: user.full_name,
-					gmail: user.gmail
+					gmail: user.gmail,
+					role: user.role
 				}
 				let token = jwt.sign(payload, process.env.SECRET_KEY, {
 					expiresIn: 1440
 				})
-				res.send(token);
+				res.send({token,expiresIn : 1440});
 			}else{
 				res.json({error: "Wrong password"})
 			}
