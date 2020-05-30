@@ -1,0 +1,362 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a API Docs written by json. This is Docs for Assigment 7",
+        "version": "1.0.0",
+        "title": "SHOPPING API",
+        "contact": {
+            "email": "17521296@gm.uit.edu.vn",
+            "name": "Nguyễn Thanh Đức"
+        },
+        "servers": [
+            "http://localhost:3000"
+        ]
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Homepage"
+                ],
+                "summary": "Get response from main page",
+                "description": "Get response from main page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Server"
+                    }
+                }
+            }
+        },
+        "/product/get-data": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Returns all product",
+                "description": "Get response in url/product/get-data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all product data"
+                    }
+                }
+            }
+        },
+        "/contact/get-data": {
+            "get": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Returns all contact on web client",
+                "description": "Get response in url/contact/get-data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All contact"
+                    }
+                }
+            }
+        },
+        "/contact/insert": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "description": "Full name",
+                        "in": "formata",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "gmail",
+                        "description": "Gmail",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "message",
+                        "description": "Message",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "summary": "Submit contact",
+                "description": "Create new contact in the database",
+                "responses": {
+                    "200": {
+                        "description": "Create new contact"
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {  
+                        "name": "name",
+                        "description": "Full name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "gmail",
+                        "description": "Gmail",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "password",
+                        "description": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "summary": "Register account",
+                "description": "Create new account in database",
+                "responses": {
+                    "200": {
+                        "description": "Registerd !!"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {  
+                        "name": "gmail",
+                        "description": "Gmail",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "password",
+                        "description": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "responses": {
+                    "200": {
+                        "description": "Return token"
+                    }
+                }
+            }
+        },
+        "/product/insert": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "parameters": [
+                    {  
+                        "name": "type",
+                        "description": "Type (vest,dress,juyp,aophong",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "name",
+                        "description": "Product name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "url",
+                        "description": "Url directly image",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "price",
+                        "description": "Product price",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "summary": "Add new product",
+                "description": "Add product ",
+                "responses": {
+                    "200": {
+                        "description": "Success !"
+                    }
+                }
+            }
+        },
+        "/product/update": {
+            "patch": {
+                "tags": [
+                    "Admin"
+                ],
+                "parameters": [
+                    {  
+                        "name": "id",
+                        "description": "Product Id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {  
+                        "name": "name",
+                        "description": "Product name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {  
+                        "name": "price",
+                        "description": "Product price",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "summary": "Update product",
+                "description": "Update product",
+                "responses": {
+                    "200": {
+                        "description": "Update Success !"
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "delete": {
+                "tags": [
+                    "Admin"
+                ],
+                "parameters": [
+                    {  
+                        "name": "id",
+                        "description": "Product id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "summary": "Delete product",
+                "description": "Delete",
+                "responses": {
+                    "200": {
+                        "description": "Product deleted"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions" : {
+        "petstore_auth" : {
+            "type" : "oauth2",
+            "authorizationUrl" : "http://petstore.swagger.io/oauth/dialog",
+            "flow" : "implicit",
+            "scopes" : {
+            "write:pets" : "modify pets in your account",
+            "read:pets" : "read your pets"
+        }
+    },
+    "api_key" : {
+        "type" : "apiKey",
+        "name" : "api_key",
+        "in" : "header"
+        }
+    },
+    "definitions": {
+        "Contacts": {
+            "required": [
+                "name",
+                "email",
+                "message"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "required": [
+                "name",
+                "type",
+                "url",
+                "price"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "schemes": ["https","http"]
+}

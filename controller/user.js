@@ -16,7 +16,7 @@ exports.register = (req,res) => {
 		gmail: req.body.gmail,
 		password: req.body.password,
 		created: today,
-		role: req.body.role
+		role: 'user'
 	};
 	User.findOne({
 		gmail: req.body.gmail
@@ -59,9 +59,9 @@ exports.login = (req,res) => {
 				let token = jwt.sign(payload, process.env.SECRET_KEY, {
 					expiresIn: 1440
 				})
-				res.send({token,expiresIn : 1440});
+				res.send(token);
 			}else{
-				res.json({error: "Wrong password"})
+				res.status(400).json({error: "Wrong password"})
 			}
 		}else{
 			res.json({error: "User does not exist"})

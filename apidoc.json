@@ -1,0 +1,456 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API document for assignment 7",
+    "version": "1.0.0",
+    "title": "API document",
+    "contact": {
+      "email": "17521296@gm.uit.edu.vn",
+      "name": "Nguyễn Thanh Đức"
+    }
+  },
+  "tags": [
+    {
+      "name": "Homepage",
+      "description": "Main server"
+    },
+    {
+      "name": "Contact",
+      "description": "Contact"
+    },
+    {
+      "name": "User",
+      "description": "User function"
+    },
+    {
+      "name": "Admin",
+      "description": "Admin function"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Main server",
+        "description": "",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Main page"
+          }
+        }
+      }
+    },
+    "/contact/get-data": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "summary": "Respnse all contact in database",
+        "description": "",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response all contact in database"
+          }
+        }
+      }
+    },
+    "/Contact/insert": {
+      "post": {
+        "tags": [
+          "Contact"
+        ],
+        "summary": "Submit new contact",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name who submit contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gmail",
+            "in": "formData",
+            "description": "Gmail who submit contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "in": "formData",
+            "description": "Content",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success !!",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/user/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create new user",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Full name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gmail",
+            "in": "formData",
+            "description": "Gmail account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registered !!!"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Login system",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "gmail",
+            "in": "formData",
+            "description": "Gmail account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login success , return token !!!"
+          },
+          "400": {
+            "description": "Invalid gmail/password"
+          }
+        }
+      }
+    },
+    "/product/get-data": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get product list",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all product in database"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/product/insert": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Create new product",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "formData",
+            "description": "Product type (vest, dress,juyp,aophong,set)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Product name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "formData",
+            "description": "URL image",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "description": "Product price",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Add new product in database!"
+          },
+          "400": {
+            "description": "Invalid price"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+            {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/product/update": {
+      "patch": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Update product",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "description": "Product id want to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Product name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "description": "Product price",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update success!"
+          },
+          "400": {
+            "description": "Invalid price"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Product id not exists"
+          }
+        },
+        "security": [
+            {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/product/{id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Delete product",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id want to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted!"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Product id not exists"
+          }
+        },
+        "security": [
+            {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "format": "string"
+        },
+        "gmail": {
+          "type": "string",
+          "format": "string"
+        },
+        "message": {
+          "type": "string",
+          "format": "string"
+        }
+      },
+      "xml": {
+        "name": "Contact"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "example": "vest"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    }
+  }
+}
